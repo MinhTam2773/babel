@@ -12,7 +12,7 @@ const BookCard = ({book}) => {
     console.log(book);
   return (
     <Box bg={bg} shadow='lg' rounded='lg' overflow='hidden' transition='all 0.3s' _hover={{transform: "translateY(-5px)", shadow: "xl"}}>
-        <Image src={book.image} alt={book.name} w={24} h={48} objectFit='cover' />
+        <Image src={book.image} alt={book.name} w={200} h={300} objectFit='cover' />
         <Text>{book.name}</Text>
         <Text>{book.price}</Text>
     </Box>

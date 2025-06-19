@@ -13,7 +13,7 @@ const HomePage = () => {
   }, [fetchFeaturedBook]);
 
   return (
-    <Container maxW="container.xl" py={12}>
+    <Container maxW="container.xl" py={12} pt={20}>
       <VStack spacing={6}>
         <Text fontSize="6xl" fontWeight="bold" color="teal.500">
           Welcome to BABEL
