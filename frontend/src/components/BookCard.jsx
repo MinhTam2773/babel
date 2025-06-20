@@ -1,5 +1,5 @@
 import React from 'react'
-import { Box, useColorModeValue, useDisclosure } from "@chakra-ui/react";
+import { Box, useColorModeValue, useDisclosure, HStack } from "@chakra-ui/react";
 import { useState } from 'react';
 import { Text, Image } from '@chakra-ui/react';
 
