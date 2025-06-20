@@ -9,6 +9,15 @@ const bookSchema = new mongoose.Schema({
         type: Number,
         required: true, 
     },
+    author: {
+        type: String,
+        required: true,
+    },
+    category: {
+        type: String,
+        enum: ['Fiction', 'Non-Fiction', 'Science', 'History', 'Biography', 'Fantasy', 'Mystery', 'Romance'],
+        default: 'Fiction',
+    },
     image: {
         type: String,
         required: true,

@@ -14,7 +14,11 @@ const BookCard = ({book}) => {
     <Box bg={bg} shadow='lg' rounded='lg' overflow='hidden' transition='all 0.3s' _hover={{transform: "translateY(-5px)", shadow: "xl"}}>
         <Image src={book.image} alt={book.name} w={200} h={300} objectFit='cover' />
         <Text>{book.name}</Text>
+        <HStack justifyContent='space-between' p={2}>
         <Text>{book.price}</Text>
+        <Text>{book.author}</Text>
+        <Text>{book.category}</Text>
+        </HStack>
     </Box>
   )
 }

@@ -1,4 +1,4 @@
-import { Container, VStack, Heading, Box, Input, Button, useColorModeValue, useToast, Image, IconButton } from '@chakra-ui/react';
+import { Container, VStack, Heading, Box, Input, Button, useColorModeValue, useToast, Image, IconButton, Select } from '@chakra-ui/react';
 import { useState, useRef } from 'react';
 import { useBookStore } from '../store/book';
 import { FiUpload, FiX } from 'react-icons/fi';
@@ -7,8 +7,11 @@ const CreatePage = () => {
   const [newBook, setNewBook] = useState({
     name: "",
     price: "",
+    author: "",
+    category: "",
     image: "", // Added to maintain consistent state structure
   });
+  const categories = ["Fiction", "Non-Fiction", "Science", "Biography", "History"];
   const [preview, setPreview] = useState("");
   const [isUploading, setIsUploading] = useState(false);
   const inputRef = useRef(null);
@@ -113,7 +116,7 @@ const CreatePage = () => {
 
       // 3. Reset form if successful
       if (success) {
-        setNewBook({ name: "", price: "", image: "" });
+        setNewBook({ name: "", price: "", image: "" , category: "", author: "" });
         setPreview("");
         if (inputRef.current) inputRef.current.value = "";
       }
@@ -131,7 +134,7 @@ const CreatePage = () => {
   };
 
   return (
-    <Container maxW="container.xl" py={12}>
+    <Container maxW="container.xl" py={12} pt={20}>
       <VStack spacing={6}>
         <Heading>Add New Book</Heading>
         <Box
@@ -148,7 +151,14 @@ const CreatePage = () => {
               onChange={(e) => setNewBook({...newBook, name: e.target.value})}
               isRequired
             />
-            
+
+            <Input
+              placeholder="Author"
+              value={newBook.author}
+              onChange={(e) => setNewBook({...newBook, author: e.target.value})}
+              isRequired
+            />
+
             <Input
               placeholder="Price"
               type="number"
@@ -156,6 +166,19 @@ const CreatePage = () => {
               onChange={(e) => setNewBook({...newBook, price: e.target.value})}
               isRequired
             />
+
+            <Select
+              value={newBook.category}
+              onChange={(e) => setNewBook({...newBook, category: e.target.value})}
+              isRequired
+            >
+                <option value="" disabled>Select Category</option>
+              { categories.map((category) => (
+                <option key={category} value={category}>
+                  {category}
+                </option>
+              )) }
+            </Select>
 
             {/* Image Upload Section */}
             <Box w="full">
@@ -206,7 +229,7 @@ const CreatePage = () => {
               w="25%"
               isLoading={isUploading}
               loadingText="Publishing..."
-              isDisabled={!newBook.name || !newBook.price || !preview}
+              isDisabled={!newBook.name || !newBook.price || !preview || !newBook.category}
             >
               Add Book
             </Button>

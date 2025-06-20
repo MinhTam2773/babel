@@ -1,5 +1,5 @@
 import React from 'react'
-import { Box, useColorModeValue, useDisclosure, Heading } from "@chakra-ui/react";
+import { Box, useColorModeValue, useDisclosure, Heading, HStack } from "@chakra-ui/react";
 import { useState } from 'react';
 import { Text, Image } from '@chakra-ui/react';
 
@@ -17,9 +17,17 @@ const FeaturedBookCard = ({book}) => {
             {book.name}
         </Heading>
 
-        <Text ml={2} marginBottom={2} fontWeight='bold' fontSize='xl' color={textColor} md={4}>
+        <HStack justifyContent='space-between' p={2}>
+          <Text ml={2} marginBottom={2} fontWeight='bold' fontSize='xl' color={textColor} md={4}>
             ${book.price}
-        </Text>
+          </Text>
+          <Text ml={2} marginBottom={2} fontWeight='bold' fontSize='md' color={textColor} md={4}>
+            JK.Rowling
+          </Text>
+          <Text ml={2} marginBottom={2} fontWeight='bold' fontSize='md' color='white' md={4} rounded='md' bg='red.600' pl={2} pr={2}>
+            {book.category}
+          </Text>
+        </HStack>
     </Box>
   )
 }
