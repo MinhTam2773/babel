@@ -17,7 +17,7 @@ const FeaturedBookCard = ({book}) => {
             {book.name}
         </Heading>
 
-        <HStack justifyContent='space-between' p={2}>
+        <HStack justifyContent='space-between' pr={3} h={10}>
           <Text ml={2} marginBottom={2} fontWeight='bold' fontSize='xl' color={textColor} md={4}>
             ${book.price}
           </Text>
