@@ -207,7 +207,7 @@ const CreatePage = () => {
                     src={preview}
                     alt="Book cover preview"
                     borderRadius="md"
-                    h={60} w={60} objectFit='cover'
+                    h={300} w={200} objectFit='cover'
                   />
                   <IconButton
                     aria-label="Remove image"
@@ -218,6 +218,7 @@ const CreatePage = () => {
                     // right={}
                     onClick={handleRemoveImage}
                     colorScheme="red"
+                    ml={2}
                   />
                 </Box>
               )}

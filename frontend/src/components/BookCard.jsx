@@ -11,7 +11,7 @@ const BookCard = ({book}) => {
     const {isOpen, onOpen, onClose} = useDisclosure(); //modal
     console.log(book);
   return (
-    <Box bg={bg} shadow='lg' rounded='lg' overflow='hidden' transition='all 0.3s' _hover={{transform: "translateY(-5px)", shadow: "xl"}}>
+    <Box bg={bg} shadow='lg' w={200} rounded='lg' overflow='hidden' transition='all 0.3s' _hover={{transform: "translateY(-5px)", shadow: "xl"}}>
         <Image src={book.image} alt={book.name} w={200} h={300} objectFit='cover' />
         <Text>{book.name}</Text>
         <HStack justifyContent='space-between' p={2}>

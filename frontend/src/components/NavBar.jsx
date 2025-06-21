@@ -31,7 +31,7 @@ const NavBar = () => {
   const hoverBg = useColorModeValue("gray.100", "gray.700");
   const borderColor = useColorModeValue("gray.200", "gray.600");
 
-  return <Container maxW={"1140px"} px={4} position={"fixed"} top={0} left={0} right={0} zIndex={1000} bg={tabBg} boxShadow={"md"} borderBottomWidth={1} borderColor={borderColor}>
+  return <Container maxW={"full"} px={4} position={"fixed"} top={0} left={0} right={0} zIndex={1000} bg={tabBg} boxShadow={"md"} borderBottomWidth={1} borderColor={borderColor}>
     <Flex h={16} alignItems={"center"} justifyContent={"space-between"} flexDir={{base: "column", sm: "row"}}>
       <Text fontSize={{ base: "30", sm: "28" }}
 					fontWeight={"bold"}
