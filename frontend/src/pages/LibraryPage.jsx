@@ -53,7 +53,7 @@ const LibraryPage = () => {
         )) }
       </HStack>
 
-      <SimpleGrid columns={{ base: 3 , sm: 3, md: 5, lg: 6 }} spacing={6} mt={2}>
+      <SimpleGrid columns={{ base: 3 , sm: 3, md: 5, lg: 6 }} spacing={6} mt={6}>
         {loading ? (
           <Text>Loading...</Text>
         ) : error ? (
@@ -66,6 +66,9 @@ const LibraryPage = () => {
             ))
         )}
       </SimpleGrid>
+      { books.filter((book) => !selectedCategory || book.category === selectedCategory).length === 0 && (
+        <Text mt={6} color='gray.500'>No books available in this category yet</Text>
+      )}
       
     </Container>
   )

@@ -1,5 +1,5 @@
 import { Container, VStack, Heading, Box, Input, Button, useColorModeValue, useToast, Image, IconButton, Select } from '@chakra-ui/react';
-import { useState, useRef } from 'react';
+import { useState, useRef, use } from 'react';
 import { useBookStore } from '../store/book';
 import { FiUpload, FiX } from 'react-icons/fi';
 
@@ -171,6 +171,7 @@ const CreatePage = () => {
               value={newBook.category}
               onChange={(e) => setNewBook({...newBook, category: e.target.value})}
               isRequired
+              color={newBook.category === "" ? "gray.400" : useColorModeValue("black", "white")}
             >
                 <option value="" disabled>Select Category</option>
               { categories.map((category) => (
