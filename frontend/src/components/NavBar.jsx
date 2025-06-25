@@ -1,5 +1,5 @@
 import React, { use } from 'react'
-import { Container, Flex, Text } from "@chakra-ui/react";
+import { Container, Flex, Text, Box, Input, Icon, ModalOverlay, Modal, ModalContent } from "@chakra-ui/react";
 import { HStack, Button } from "@chakra-ui/react";
 import { PlusSquareIcon } from "@chakra-ui/icons";
 import { Link  } from "react-router-dom";
@@ -9,6 +9,10 @@ import { LuSun } from "react-icons/lu";
 import { Tabs, TabList, Tab } from "@chakra-ui/react";
 import { useColorModeValue } from "@chakra-ui/react";
 import { useLocation } from "react-router-dom";
+import { SearchIcon } from "@chakra-ui/icons";
+import { useState } from "react";
+import { useDisclosure } from "@chakra-ui/react";
+import SearchBar from './SearchBar';
 
 const NavBar = () => {
   const { colorMode, toggleColorMode } = useColorMode();
@@ -40,9 +44,10 @@ const NavBar = () => {
 					bgGradient={"linear(to-r, cyan.400, blue.500)"}
 					bgClip={"text"}>
         <Link to={"/"}>BABEL</Link>
-      </Text>  
+      </Text>
 
       <HStack spacing={5} >
+        <SearchBar/>
         <Tabs variant='soft-rounded' colorScheme='blue' index={getTabIndex()}>
           <TabList
               gap={1}
@@ -93,13 +98,14 @@ const NavBar = () => {
           </TabList>
         </Tabs>
         <Button onClick={toggleColorMode}>
-            {colorMode === "light" ? <IoMoon/> : <LuSun size="20"/>}
+            {colorMode === "light" ? <IoMoon size="20" /> : <LuSun size="20"/>}
         </Button>
         <Button as={Link} to="/create"  >
           <PlusSquareIcon />
         </Button>
       </HStack>
     </Flex>
+
   </Container>
 }
 

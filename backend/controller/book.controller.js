@@ -11,12 +11,22 @@ export const getBooks = async (req, res) => {
     }
 }
 
-export const createBook = async (req, res) => 
-{
+export const getBookById = async (req, res) => {
+    const { id } = req.params; // get the id from the url
+    try {
+        const book = await Book.findById(id); // find all products in the database
+        res.status(200).json({ success: true, data: book });
+    } catch (error) {
+        console.error("Error in getting books", error.message);
+        res.status(500).json({ success: false, message: 'Server Error' });
+    }
+}
+
+export const createBook = async (req, res) => {
     const book = req.body; //user will send this data
 
     if (!book.name || !book.price || !book.image) {
-        return res.status(400).json({ success:false, message: 'Please fill all the fields' });
+        return res.status(400).json({ success: false, message: 'Please fill all the fields' });
     }
 
     const newBook = new Book(book)
@@ -31,7 +41,7 @@ export const createBook = async (req, res) =>
 }
 
 export const updateBook = async (req, res) => {
-    const {id} = req.params; // get the id from the url
+    const { id } = req.params; // get the id from the url
     const book = req.body; // user will send this data
 
     if (!mongoose.Types.ObjectId.isValid(id)) { // check if the id is valid
@@ -47,9 +57,9 @@ export const updateBook = async (req, res) => {
     }
 }
 
-export const deleteBook = async (req, res) => { 
-    const {id} = req.params; // get the id from the url
-    
+export const deleteBook = async (req, res) => {
+    const { id } = req.params; // get the id from the url
+
     if (!mongoose.Types.ObjectId.isValid(id)) { // check if the id is valid
         return res.status(404).json({ success: false, message: 'Invalid book ID' });
     }
@@ -64,10 +74,10 @@ export const deleteBook = async (req, res) => {
 }
 
 export const getFeaturedBook = async (req, res) => {
-  try {
-    const book = await Book.findOne(); // Gets first book in database
-    res.json({ success: true, data: book });
-  } catch (error) {
-    res.status(500).json({ success: false, message: 'Server Error' });
-  }
+    try {
+        const book = await Book.findOne(); // Gets first book in database
+        res.json({ success: true, data: book });
+    } catch (error) {
+        res.status(500).json({ success: false, message: 'Server Error' });
+    }
 };

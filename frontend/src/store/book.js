@@ -3,8 +3,10 @@ import {create} from "zustand";
 export const useBookStore = create((set) => ({
     books: [],
     featuredBook: null,
+    book: null,
     loading: false,
     error: null,
+    setBook: (book) => set({ book }),
     setFeaturedBook: (book) => set({ featuredBook: book }),
     setBooks: (books) => set({ books }),
     createBook: async (newBook) => {
@@ -82,6 +84,30 @@ export const useBookStore = create((set) => ({
                 error: error.message,
                 loading: false,
                 featuredBook: null
+            });
+        }
+    },
+
+    fetchBookById: async (id) => {
+        set({ loading: true, error: null });
+        try {
+            const res = await fetch(`/api/books/${id}`);
+            const data = await res.json();
+            
+            if (!res.ok) {
+                throw new Error(data.message || "Failed to fetch book");
+            }
+
+            set({ 
+                book: data.data,
+                loading: false 
+            });
+        } catch (error) {
+            console.error("Fetch error:", error);
+            set({ 
+                error: error.message,
+                loading: false,
+                book: null
             });
         }
     }

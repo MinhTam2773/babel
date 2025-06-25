@@ -3,9 +3,11 @@ import { Box, useColorModeValue, useDisclosure, VStack } from "@chakra-ui/react"
 import { Badge } from '@chakra-ui/react';
 import { useState } from 'react';
 import { Text, Image } from '@chakra-ui/react';
+import { useNavigate } from 'react-router-dom';
 
 
 const BookCard = ({ book }) => {
+  const navigation = useNavigate();
   const textColor = useColorModeValue('gray.700', 'gray.200');
   const bg = useColorModeValue('white', 'gray.800');
   const shadow = useColorModeValue('md', 'dark-lg');
@@ -18,7 +20,8 @@ const BookCard = ({ book }) => {
       overflow="hidden"
       position="relative"
       transition="all 0.3s"
-      _hover={{ transform: 'translateY(-5px)', shadow: 'xl' }}
+      _hover={{ transform: 'translateY(-5px)', shadow: 'xl' , cursor:'pointer'}}
+      onClick={()=>navigation(`/${book._id}`)}
     >
       {/* Image with price overlay */}
       <Image

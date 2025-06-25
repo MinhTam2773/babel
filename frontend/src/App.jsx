@@ -7,6 +7,8 @@ import { useColorModeValue } from "@chakra-ui/react";
 import CreatePage from "./pages/CreatePage";
 import AboutPage from "./pages/AboutPage";
 import Footer from "./components/Footer";
+import BookPage from "./pages/BookPage";
+import ResultPage from "./pages/ResultPage";
 
 function App() {
 
@@ -19,6 +21,8 @@ function App() {
           <Route path="/library" element={<LibraryPage />} />
           <Route path="/create" element={<CreatePage />} />
           <Route path="/about" element={<AboutPage />} />
+          <Route path="/:id" element={<BookPage />} />
+          <Route path="/search" element={<ResultPage/>} />
         </Routes>
         <Footer />
       </Box>

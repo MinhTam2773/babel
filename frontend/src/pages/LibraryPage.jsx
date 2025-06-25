@@ -25,21 +25,7 @@ const LibraryPage = () => {
     console.log(`Selected category: ${category}`);
   }
   return (
-    <Container maxW="full" py={12} pt={20}>
-      <VStack spacing={8}>
-        <Box shadow='lg' rounded='lg' w='60%' bg='gray.700'>
-          <HStack spacing={8} p={4}>
-            <Image src={featuredBook?.image} alt={featuredBook?.name} w={200} h={300} objectFit='cover' />
-            <VStack spacing={6} align='start' alignSelf={'flex-start'}>
-              <Heading as='h2' size='xl' color='white'>
-                Authority
-              </Heading>
-              <Text bg='gray.800' p={2} rounded='lg' w='100%'>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Provident, iure voluptas ab nisi in incidunt magnam harum, nostrum cum commodi nemo! Ex iure nobis ea minus nam est? Fugit, iste?</Text>
-            </VStack>
-          </HStack>
-        </Box>
-      </VStack>
-
+    <Container maxW="full" py={12}>
       <HStack spacing={6} mt={12} alignItems='flex-start'>
         <Box bg='gray.800' p={2} rounded='lg' shadow='md' onClick={() => HandleSelectedCategory(defaultSelectedCategory)} cursor='pointer' _hover={{ bg: selectedCategory === defaultSelectedCategory ? 'blue.600 ' : 'gray.700' }} {...selectedCategory === defaultSelectedCategory && { bg: 'blue.500', color: 'white' }} userSelect="none">
           <Heading as='h3' size='md'>All</Heading>
