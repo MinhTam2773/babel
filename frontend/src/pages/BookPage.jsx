@@ -11,13 +11,10 @@ import BookCard from '../components/BookCard';
 
 const BookPage = () => {
   const containRef = useRef();
-  const [scrollPosition, setScrollPosition] = useState(0);
-  const SCROLL_WIDTH = 200 * 5 + 175;
-
   const [show, setShow] = useState(false);
   const { id } = useParams();
   const { fetchBookById, book, loading, error, books, fetchBooks } = useBookStore();
-  const MAX_WIDTH = books.length * 200 + 9*(books.length - 1);
+  const [scrollPosition, setScrollPosition] = useState(0);
 
   useEffect(() => {
     if (id) {
@@ -29,7 +26,6 @@ const BookPage = () => {
     fetchBooks();
   }, [fetchBooks])
 
-  console.log(MAX_WIDTH)
 
   if (loading) {
     return (
@@ -54,15 +50,23 @@ const BookPage = () => {
       </Container>
     );
   }
+  const getScrollValues = () => {
+    const container = containRef.current;
+    const scrollWidth = container?.clientWidth || 0;
+    const maxScroll = (container?.scrollWidth || 0) - scrollWidth;
+    const scrollStep = scrollWidth + 16;
+    return { scrollStep, maxScroll };
+  };
 
-  console.log(scrollPosition)
-  const handleScrolling = (width) => {
-    const newScrollPosition = width + scrollPosition <= 0? 0 : width + scrollPosition >= MAX_WIDTH? MAX_WIDTH : width + scrollPosition;
-    setScrollPosition(newScrollPosition);
-
-    containRef.current.scrollLeft = newScrollPosition;
-  }
-
+  const handleScrolling = (delta) => {
+    const { scrollStep, maxScroll } = getScrollValues();
+    const newPosition = Math.min(
+      Math.max(scrollPosition + delta, 0),
+      maxScroll
+    );
+    containRef.current.scrollLeft = newPosition;
+    setScrollPosition(newPosition);
+  };
 
   return (
     <Container maxW="container.xl" py={12} pt={20} >
@@ -119,7 +123,7 @@ const BookPage = () => {
         Books related to {book.name}
       </Heading>
       <HStack>
-        <Button onClick={() => handleScrolling(-SCROLL_WIDTH)}>{'<'}</Button>
+        <Button onClick={() => handleScrolling(-getScrollValues().scrollStep)}>{'<'}</Button>
         <Box ref={containRef} gap={9} mt={6} display={'flex'} scrollBehavior={'smooth'} overflowX="scroll"
           sx={{
             '::-webkit-scrollbar': {
@@ -127,7 +131,7 @@ const BookPage = () => {
             }
           }}>
           {books
-            // .filter((filterbook) => filterbook.category === book.category)
+            .filter((b) => b._id !== book._id)
             .map((b) => (
               <Box flex='0 0 auto'>
                 <BookCard key={b._id} book={b} />
@@ -135,7 +139,7 @@ const BookPage = () => {
             )
             )}
         </Box>
-        <Button onClick={() => handleScrolling(SCROLL_WIDTH)}>{'>'}</Button>
+        <Button onClick={() => handleScrolling(getScrollValues().scrollStep)}>{'>'}</Button>
       </HStack>
     </Container>
   )

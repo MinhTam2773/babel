@@ -39,7 +39,7 @@ const SearchBar = () => {
 
     return (
         <Box ref={wrapperRef} w='800px' position='relative' display='flex' bg='gray.900' borderRadius={100} >
-            <Input borderLeftRadius={100} border='solid 2px #313742' w={750} focusBorderColor="#313742" placeholder='Search a Book or Author...'
+            <Input borderLeftRadius={100} border='solid 2px #313742' w={750} focusBorderColor="#313742" placeholder='Search a Book or Author...' userSelect={'none'}
                 value={searchQuery}
                 onChange={(e) => [setSearchQuery(e.target.value), setIsOpen(true)]}
                 onClick={() => setIsOpen(true)}
